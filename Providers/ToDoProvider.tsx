@@ -7,7 +7,7 @@ interface TodoContextType {
 const ToDoContext = createContext<any>(null);
 
 export const ToDoProvider: React.FC<TodoContextType> = ({ children }) => {
-  const [todostate, setTodostate] = useState("Work");
+  const [todostate, setTodostate] = useState("personal");
 
   const contextValue = {
     todostate,

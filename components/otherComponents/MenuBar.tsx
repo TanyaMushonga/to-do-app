@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "../ui/button";
-import Link from "next/link";
-import { BriefcaseBusiness, BookHeart } from "lucide-react";
+import { BriefcaseBusiness, BookHeart, BadgeDollarSign, EthernetPort  } from "lucide-react";
 import { useTodo } from "@/Providers/ToDoProvider";
 
 interface MenuBarProps {
@@ -10,7 +9,7 @@ interface MenuBarProps {
 }
 
 function MenuBar({ className }: MenuBarProps) {
-  const { todostate, setTodostate } = useTodo();
+  const { setTodostate } = useTodo();
   return (
     <div className={className}>
       <Button
@@ -52,7 +51,7 @@ function MenuBar({ className }: MenuBarProps) {
         }}
       >
         <div>
-          <BriefcaseBusiness color="#44ca46" strokeWidth={3} />
+        <BadgeDollarSign color="#44ca46" strokeWidth={3} />
           <span className="hidden lg:inline"> Finance</span>
         </div>
       </Button>
@@ -66,7 +65,7 @@ function MenuBar({ className }: MenuBarProps) {
         }}
       >
         <div>
-          <BriefcaseBusiness color="#44ca46" strokeWidth={3} />
+        <EthernetPort color="#44ca46" strokeWidth={3} />
           <span className="hidden lg:inline"> Other</span>
         </div>
       </Button>
