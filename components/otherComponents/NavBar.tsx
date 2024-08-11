@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SearchField from "./SearchField";
 import UserButton from "./UserButton";
+import { Plus } from "lucide-react";
 
 export default function NavBar() {
   return (
@@ -10,7 +11,13 @@ export default function NavBar() {
           Your To-Do
         </Link>
         <SearchField />
-        <UserButton className="sm:ms-auto" />
+        <div className="flex sm:ms-auto gap-5">
+        <UserButton className="" />
+        <Link href="/add-todo" className="bg-primary p-2 rounded-lg flex gap-1">
+          <Plus color="#eef6ef" strokeWidth={3} />
+          <span className="text-white">add todo</span>
+        </Link>
+        </div>
       </div>
     </header>
   );

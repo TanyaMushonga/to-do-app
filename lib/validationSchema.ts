@@ -19,3 +19,12 @@ export const loginSchema = z.object({
 });
 
 export type loginValues = z.infer<typeof loginSchema>;
+
+export const todoSchema = z.object({
+  title: requiredString,
+  priority: requiredString,
+  description: requiredString,
+  duedate: requiredString,
+});
+
+export type todoValues = z.infer<typeof loginSchema>;
