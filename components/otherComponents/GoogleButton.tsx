@@ -9,6 +9,7 @@ function GoogleButton() {
       onClick={() => {
         console.log("clicked");
       }}
+      className="bg-foreground hover:bg-foreground/70"
     >
       <div className="flex gap-5 justify-center items-center">
         <Image
