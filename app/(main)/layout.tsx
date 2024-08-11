@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import SessionProvider from "@/Providers/SessionContext";
 import NavBar from "@/components/otherComponents/NavBar";
 import MenuBar from "@/components/otherComponents/MenuBar";
+import { ToDoProvider } from "@/Providers/ToDoProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -24,14 +25,16 @@ export default async function Layout({
 
   return (
     <SessionProvider value={session}>
-      <div className="flex min-h-screen flex-col">
-        <NavBar />
-        <div className="mx-auto flex w-full max-w-7xl grow gap-5 p-5">
-          <MenuBar className="stick top-[5.25rem] hidden h-fit flex-none space-y-3 rounded-2xl bg-card px-3 py-5 shadow-sm sm:block lg:px-5 xl:w-80" />
-          {children}
+      <ToDoProvider>
+        <div className="flex min-h-screen flex-col">
+          <NavBar />
+          <div className="mx-auto flex w-full max-w-7xl grow gap-5 p-5">
+            <MenuBar className="stick top-[5.25rem] hidden h-fit flex-none space-y-3 rounded-2xl bg-card px-3 py-5 shadow-sm sm:block lg:px-5 xl:w-80" />
+            {children}
+          </div>
+          <MenuBar className="sticky bottom-0 flex w-full justify-between gap-1 border-t bg-card p-3 sm:hidden" />
         </div>
-        <MenuBar className="sticky bottom-0 flex w-full justify-center gap-5 border-t bg-card p-3 sm:hidden" />
-      </div>
+      </ToDoProvider>
     </SessionProvider>
   );
 }
