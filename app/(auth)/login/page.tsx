@@ -1,6 +1,12 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import GoogleButton from "@/components/otherComponents/GoogleButton";
+import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login",
+};
 
 function page() {
   return (
@@ -15,9 +21,9 @@ function page() {
           <GoogleButton />
           <p className="text-center my-3">
             Don&apos;t have an account?{" "}
-            <a href="/signup" className="text-primary">
+            <Link href="/signup" className="text-primary">
               Signup
-            </a>
+            </Link>
           </p>
         </div>
       </div>

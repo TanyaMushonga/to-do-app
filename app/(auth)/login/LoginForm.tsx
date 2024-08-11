@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useTransition } from "react";
 import { loginSchema, loginValues } from "../../../lib/validationSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,9 +15,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { redirect } from "next/navigation";
+import { PasswordInput } from "@/components/otherComponents/PassowrdInput";
+import { login } from "./actions";
+import LoadingButton from "@/components/otherComponents/LoadingButton";
 
 function LoginForm() {
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>();
+  const [isPending, startTransition] = useTransition();
   const form = useForm<loginValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -26,7 +30,15 @@ function LoginForm() {
     },
   });
 
-  async function onSubmit(values: loginValues) {}
+  async function onSubmit(values: loginValues) {
+    setError(undefined);
+    startTransition(async () => {
+      const { error } = await login(values);
+      if (error) {
+        setError(error);
+      }
+    });
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -38,7 +50,7 @@ function LoginForm() {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="password" {...field} />
+                <Input placeholder="username" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -52,14 +64,16 @@ function LoginForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="password" {...field} />
+                <PasswordInput placeholder="password" {...field} />
               </FormControl>
 
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
+        <LoadingButton loading={isPending} type="submit" className="w-full">
+          Log in
+        </LoadingButton>
       </form>
     </Form>
   );

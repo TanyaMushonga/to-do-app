@@ -3,7 +3,7 @@ import React from "react";
 import { signupSchema, signupValues } from "../../../lib/validationSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState, useTransition } from "react";
 import { signUp } from "./actions";
+import { PasswordInput } from "@/components/otherComponents/PassowrdInput";
+import LoadingButton from "./../../../components/otherComponents/LoadingButton";
 
 function SignupForm() {
   const [error, setError] = useState<string>();
@@ -77,15 +79,17 @@ function SignupForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="password" {...field} />
+                <PasswordInput placeholder="password" {...field} />
               </FormControl>
 
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Sign up</Button>
-      </form> 
+        <LoadingButton loading={isPending} type="submit" className="w-full">
+          Sign up
+        </LoadingButton>
+      </form>
     </Form>
   );
 }
