@@ -3,7 +3,7 @@
 import React from "react";
 
 function Page() {
-  return <div></div>;
+  return <div>home</div>;
 }
 
 export default Page;

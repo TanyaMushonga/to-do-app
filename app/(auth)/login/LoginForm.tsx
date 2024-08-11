@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { redirect } from "next/navigation";
 
 function LoginForm() {
   const [error, setError] = useState<string | null>(null);
@@ -25,8 +26,10 @@ function LoginForm() {
     },
   });
 
-  function onSubmit(values: loginValues) {
-    console.log(values);
+  async function onSubmit(values: loginValues) {
+   
+
+    
   }
   return (
     <Form {...form}>

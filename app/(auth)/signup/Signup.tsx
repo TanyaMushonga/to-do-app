@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { loginSchema, loginValues } from "../../../lib/validationSchema";
+import { signupSchema, signupValues } from "../../../lib/validationSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -13,12 +13,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { signUp } from "./actions";
 
 function SignupForm() {
-  const [error, setError] = useState<string | null>(null);
-  const form = useForm<loginValues>({
-    resolver: zodResolver(loginSchema),
+  const [error, setError] = useState<string>();
+  const [isPending, startTransition] = useTransition();
+
+  const form = useForm<signupValues>({
+    resolver: zodResolver(signupSchema),
     defaultValues: {
       username: "",
       email: "",
@@ -26,8 +29,14 @@ function SignupForm() {
     },
   });
 
-  function onSubmit(values: loginValues) {
-    console.log(values);
+  function onSubmit(values: signupValues) {
+    setError(undefined);
+    startTransition(async () => {
+      const { error } = await signUp(values);
+      if (error) {
+        setError(error);
+      }
+    });
   }
   return (
     <Form {...form}>
@@ -75,8 +84,8 @@ function SignupForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
-      </form>
+        <Button type="submit">Sign up</Button>
+      </form> 
     </Form>
   );
 }
