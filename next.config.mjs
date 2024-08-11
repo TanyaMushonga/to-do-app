@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config, { isServer }) => {
-    config.module.rules.push({
-      test: /\.node$/,
-      use: 'file-loader',
-    });
-    return config;
+  experimental: {
+    staleTimes: {
+      dynamic: 30,
+    },
+    serverComponentsExternalPackages: ["@node-rs/argon2"]
   },
+
 };
 
 export default nextConfig;

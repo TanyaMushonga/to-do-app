@@ -2,13 +2,12 @@
 import React from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
 
 function GoogleButton() {
   return (
     <Button
       onClick={() => {
-        signIn("google");
+        console.log("clicked");
       }}
     >
       <div className="flex gap-5 justify-center items-center">

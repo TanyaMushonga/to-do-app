@@ -21,26 +21,22 @@ function LoginForm() {
   const form = useForm<loginValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
 
-  async function onSubmit(values: loginValues) {
-   
-
-    
-  }
+  async function onSubmit(values: loginValues) {}
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {error && <p className="text-center text-destructive">{error}</p>}
         <FormField
           control={form.control}
-          name="email"
+          name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input placeholder="password" {...field} />
               </FormControl>
