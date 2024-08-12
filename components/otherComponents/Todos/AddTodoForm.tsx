@@ -32,6 +32,7 @@ import { useForm, Controller } from "react-hook-form";
 import { todoValues, todoSchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addTodo } from "@/app/actions/addTodo";
+import { useMutation } from "@tanstack/react-query";
 
 function AddTodoForm() {
   const [error, setError] = useState<string>();
@@ -48,7 +49,7 @@ function AddTodoForm() {
 
   async function onSubmit(values: todoValues) {
     setError(undefined);
-    startTransition(async () => { });
+    
   }
 
   return (
@@ -69,30 +70,30 @@ function AddTodoForm() {
             </FormItem>
           )}
         />
-    
-          <FormField
-            name="priority"
-            control={form.control}
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>Priority</FormLabel>
-                <Select {...field} onValueChange={field.onChange}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="--" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Low">Low</SelectItem>
-                    <SelectItem value="Medium">Medium</SelectItem>
-                    <SelectItem value="High">High</SelectItem>
-                  </SelectContent>
-                </Select>
-                {fieldState.error && (
-                  <p className="text-red-500">{fieldState.error.message}</p>
-                )}
-              </FormItem>
-            )}
-          />
-   
+
+        <FormField
+          name="priority"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <FormItem>
+              <FormLabel>Priority</FormLabel>
+              <Select {...field} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="--" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Low">Low</SelectItem>
+                  <SelectItem value="Medium">Medium</SelectItem>
+                  <SelectItem value="High">High</SelectItem>
+                </SelectContent>
+              </Select>
+              {fieldState.error && (
+                <p className="text-red-500">{fieldState.error.message}</p>
+              )}
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="duedate"
@@ -140,12 +141,14 @@ function AddTodoForm() {
               <FormControl>
                 <Textarea {...field} />
               </FormControl>
-              {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+              {fieldState.error && (
+                <FormMessage>{fieldState.error.message}</FormMessage>
+              )}
             </FormItem>
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Add todo</Button>
       </form>
     </Form>
   );
