@@ -8,7 +8,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription,
 } from "@/components/ui/form";
 import {
   Select,
@@ -28,11 +27,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { todoValues, todoSchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addTodo } from "@/app/actions/addTodo";
-import { useMutation } from "@tanstack/react-query";
 
 function AddTodoForm() {
   const [error, setError] = useState<string>();
@@ -42,6 +40,7 @@ function AddTodoForm() {
     defaultValues: {
       title: "",
       priority: undefined,
+      category: undefined,
       description: "",
       duedate: undefined,
     },
@@ -49,7 +48,15 @@ function AddTodoForm() {
 
   async function onSubmit(values: todoValues) {
     setError(undefined);
-    
+    startTransition(() => {
+      addTodo(values)
+        .then(() => {
+          form.reset();
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    });
   }
 
   return (
@@ -85,6 +92,30 @@ function AddTodoForm() {
                   <SelectItem value="Low">Low</SelectItem>
                   <SelectItem value="Medium">Medium</SelectItem>
                   <SelectItem value="High">High</SelectItem>
+                </SelectContent>
+              </Select>
+              {fieldState.error && (
+                <p className="text-red-500">{fieldState.error.message}</p>
+              )}
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="category"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select {...field} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="--" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Personal">Personal</SelectItem>
+                  <SelectItem value="Work">Work</SelectItem>
+                  <SelectItem value="Finance">Finance</SelectItem>
+                  <SelectItem value="Others">Others</SelectItem>
                 </SelectContent>
               </Select>
               {fieldState.error && (
@@ -148,7 +179,9 @@ function AddTodoForm() {
           )}
         />
 
-        <Button type="submit">Add todo</Button>
+        <Button type="submit">
+          {isPending ? <p>loading</p> : <p>Add todo</p>}
+        </Button>
       </form>
     </Form>
   );

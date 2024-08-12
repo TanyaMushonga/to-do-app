@@ -25,6 +25,9 @@ export const todoSchema = z.object({
   priority: z.enum(["Low", "Medium", "High"], {
     required_error: "Priority is required",
   }),
+  category: z.enum(["Personal", "Work", "Finance", "Others"], {
+    required_error: "Category is required",
+  }),
   description: requiredString,
   duedate: z.date({
     required_error: "Due date is required.",

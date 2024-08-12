@@ -42,6 +42,7 @@ model Todos {
   userId      String
   title       String
   priority    String
+  category    String
   description String
   duedate     DateTime
   createdAt   DateTime @default(now())

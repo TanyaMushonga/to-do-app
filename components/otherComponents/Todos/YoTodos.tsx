@@ -2,6 +2,7 @@
 import React from "react";
 import { useTodo } from "@/Providers/ToDoProvider";
 import AddTodo from "./AddTodo";
+import DisplayTodos from "./DisplayTodos";
 
 function YoTodos() {
   const { todostate } = useTodo();
@@ -9,7 +10,7 @@ function YoTodos() {
   let content;
   switch (todostate) {
     case "personal":
-      content = <p>personal</p>;
+      content = <DisplayTodos />;
       break;
     case "work":
       content = <p>work</p>;
@@ -21,7 +22,7 @@ function YoTodos() {
       content = <p>others</p>;
       break;
     case "add-todo":
-      content = <AddTodo/>
+      content = <AddTodo />;
       break;
     default:
       content = null;
