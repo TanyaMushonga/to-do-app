@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
 import { useTodo } from "@/Providers/ToDoProvider";
+import AddTodo from "./AddTodo";
 
-function YoTos() {
+function YoTodos() {
   const { todostate } = useTodo();
 
   let content;
@@ -19,6 +20,9 @@ function YoTos() {
     case "others":
       content = <p>others</p>;
       break;
+    case "add-todo":
+      content = <AddTodo/>
+      break;
     default:
       content = null;
   }
@@ -26,4 +30,4 @@ function YoTos() {
   return <div>{content}</div>;
 }
 
-export default YoTos;
+export default YoTodos;

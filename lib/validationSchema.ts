@@ -22,9 +22,13 @@ export type loginValues = z.infer<typeof loginSchema>;
 
 export const todoSchema = z.object({
   title: requiredString,
-  priority: requiredString,
+  priority: z.enum(["Low", "Medium", "High"], {
+    required_error: "Priority is required",
+  }),
   description: requiredString,
-  duedate: requiredString,
+  duedate: z.date({
+    required_error: "Due date is required.",
+  }),
 });
 
-export type todoValues = z.infer<typeof loginSchema>;
+export type todoValues = z.infer<typeof todoSchema>;
