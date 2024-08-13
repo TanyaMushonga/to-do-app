@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import Todocard from "./Todocard";
 
 function DisplayTodos() {
   const queryClient = useQueryClient();
@@ -32,16 +33,7 @@ function DisplayTodos() {
 
   return (
     <div>
-      {data?.message}
-      <button
-        onClick={() => {
-          server_addtodo({
-            name: "tanya",
-          });
-        }}
-      >
-        Add
-      </button>
+      <Todocard />
     </div>
   );
 }

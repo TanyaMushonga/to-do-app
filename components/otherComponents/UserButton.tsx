@@ -11,7 +11,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu";
-import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon } from "lucide-react";
+import { Check, LogOutIcon, Monitor, Moon, Sun} from "lucide-react";
 import UserAvatar from "./UserAvata";
 import { useSession } from "@/Providers/SessionContext";
 import { useTheme } from "next-themes";
