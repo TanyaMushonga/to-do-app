@@ -26,7 +26,10 @@ export default async function Layout({
   return (
     <SessionProvider value={session}>
       <ToDoProvider>
-        <div className="flex min-h-screen flex-col">
+        <div
+          className="flex min-h-screen flex-col"
+          suppressHydrationWarning={true}
+        >
           <NavBar />
           <div className="mx-auto flex w-full max-w-7xl grow gap-5 p-5">
             <MenuBar className="stick top-[5.25rem] hidden h-fit flex-none space-y-3 rounded-2xl bg-card px-3 py-5 shadow-sm sm:block lg:px-5 xl:w-80" />

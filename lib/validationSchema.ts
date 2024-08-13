@@ -29,9 +29,6 @@ export const todoSchema = z.object({
     required_error: "Category is required",
   }),
   description: requiredString,
-  duedate: z.date({
-    required_error: "Due date is required.",
-  }),
 });
 
 export type todoValues = z.infer<typeof todoSchema>;

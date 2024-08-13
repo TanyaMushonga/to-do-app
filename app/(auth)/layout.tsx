@@ -8,7 +8,7 @@ export default async function Layout({
   const { user } = await validateRequest();
   if (user) redirect("/");
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body>{children}</body>
     </html>
   );

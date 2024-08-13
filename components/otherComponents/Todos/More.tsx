@@ -9,15 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-interface MoreProps {
-  className: string;
-}
-
-function More({ className }: MoreProps) {
+function More() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="bg-secondary hover:bg-secondary w-fit">
+        <Button className="bg-secondary hover:bg-secondary w-fit rounded-xl border-secondary">
           <Ellipsis size={16} color="#181b19" />
         </Button>
       </DropdownMenuTrigger>

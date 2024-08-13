@@ -1,49 +1,50 @@
-import React from "react";
 import More from "./More";
 
 interface TodocardProps {
-  data: [];
+  title: string;
+  priority: string;
+  description: string;
+  completed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
-function Todocard({ data }: TodocardProps) {
+function Todocard({
+  title,
+  priority,
+  description,
+  completed,
+  createdAt,
+  updatedAt,
+}: TodocardProps) {
   return (
     <div className="w-full h-auto p-3 bg-secondary rounded-md space-y-2">
       <div className="flex flex-row justify-between items-center">
-        <div>
-          <h3 className="text-md md:text-xl font-semibold">Title</h3>
+        <div className="space-y-2">
+          <h3 className="text-md md:text-xl font-semibold">{title}</h3>
           <div className="flex flex-wrap flex-row space-x-2">
             <div className="bg-destructive rounded-xl flex justify-around p-1">
-              <p className="text-xs text-accent">High</p>
+              <p className="text-xs text-accent">{priority}</p>
             </div>
             <div className="bg-primary rounded-xl flex justify-around p-1">
-              <p className="text-xs text-accent">Completed</p>
+              <p className="text-xs text-accent">{completed ? "yes" : "no"}</p>
             </div>
           </div>
         </div>
-        <More className="" />
+        <More />
       </div>
       <div className="border-t-2 bg-accent-foreground" />
       <div className="flex gap-3 flex-wrap items-center">
         <p className="text-xs">
-          Created: <span className="text-xs">12-09-2024</span>
+          Created: <span className="text-xs">{createdAt}</span>
         </p>
-        <p className="text-xs font-thin">
-          Last edited: <span className="text-xs">12-09-2024</span>
+        <p className="text-xs">
+          Last edited: <span className="text-xs">{updatedAt}</span>
         </p>
-        <div className="bg-primary rounded-xl flex justify-around p-1">
-          <p className="text-xs text-accent">
-            Due: <span className="text-xs text-accent">12-09-2024</span>
-          </p>
-        </div>
       </div>
       <div className="border-t-2 bg-accent-foreground" />
       <div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-          doloremque cum a, placeat esse laboriosam aspernatur animi fugit nemo
-          optio ipsam maiores molestias saepe ratione, modi quis quae, rem
-          reprehenderit!
-        </p>
+        <p>{description}</p>
       </div>
     </div>
   );
