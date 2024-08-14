@@ -18,7 +18,7 @@ function Todocard({
   updatedAt,
 }: TodocardProps) {
   return (
-    <div className="w-full h-auto p-3 bg-secondary rounded-md space-y-2">
+    <div className="w-full h-auto p-3 bg-secondary rounded-md space-y-2 ">
       <div className="flex flex-row justify-between items-center">
         <div className="space-y-2">
           <h3 className="text-md md:text-xl font-semibold">{title}</h3>
