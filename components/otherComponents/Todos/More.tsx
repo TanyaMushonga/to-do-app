@@ -8,8 +8,27 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-function More() {
+interface MoreProps {
+  id: string;
+}
+
+function More({ id }: MoreProps) {
+  const queryClient = useQueryClient();
+
+  const { mutate: server_updateTodo } = useMutation({
+    mutationFn: (todo: any) =>
+      fetch(`/api/edit-todo/${todo.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ completed: !todo.completed }),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -18,7 +37,13 @@ function More() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() => {}}>Mark as done</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            server_updateTodo({ id: id, completed: false });
+          }}
+        >
+          Mark as done
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => {}}>Edit Todo</DropdownMenuItem>
         <DropdownMenuItem onClick={() => {}}>Delete Todo</DropdownMenuItem>
       </DropdownMenuContent>

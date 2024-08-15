@@ -12,7 +12,6 @@ import Todocard from "./Todocard";
 import { useInView } from "react-intersection-observer";
 import ky from "ky";
 import { Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import InfiniteScrollContainer from "../InfiniteScrollContainer";
 
 function YoTodos() {
@@ -48,17 +47,6 @@ function YoTodos() {
 
   if (status === "error")
     return <p className="text-center text-destructive">An error has occured</p>;
-
-  // useEffect(() => {
-  //   if (inView && hasNextPage) {
-  //     fetchNextPage();
-  //   }
-  // }, [inView, hasNextPage, fetchNextPage]);
-
-  // const { data, error, isLoading } = useQuery({
-  //   queryKey: ["todos"],
-  //   queryFn: () => fetch("/api/todos?page=1").then((res) => res.json()),
-  // });
 
   // const {
   //   mutate: server_addtodo,
@@ -106,13 +94,14 @@ function YoTodos() {
   return (
     <InfiniteScrollContainer
       onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
-      className="overflow-x-auto "
+      className=" "
     >
       <h2 className="text-lg md:text-xl font-semibold my-3">{title}</h2>
       <div className="space-y-2">
-        {todos?.map((todos: any) => (
+        {filteredData?.map((todos: any) => (
           <Todocard
             key={todos.id}
+            id={todos.id}
             title={todos.title}
             priority={todos.priority}
             description={todos.description}
@@ -121,7 +110,7 @@ function YoTodos() {
             updatedAt={todos.updatedAt}
           />
         ))}
-         {isFetchingNextPage && (
+        {isFetchingNextPage && (
           <Loader2 className="mx-auto my-3 animate-spin" />
         )}
       </div>

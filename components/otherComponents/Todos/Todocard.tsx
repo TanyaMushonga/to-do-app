@@ -1,6 +1,7 @@
 import More from "./More";
 
 interface TodocardProps {
+  id: string;
   title: string;
   priority: string;
   description: string;
@@ -10,6 +11,7 @@ interface TodocardProps {
 }
 
 function Todocard({
+  id,
   title,
   priority,
   description,
@@ -31,7 +33,7 @@ function Todocard({
             </div>
           </div>
         </div>
-        <More />
+        <More id={id} />
       </div>
       <div className="border-t-2 bg-accent-foreground" />
       <div className="flex gap-3 flex-wrap items-center">
