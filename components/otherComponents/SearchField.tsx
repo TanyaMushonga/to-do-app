@@ -12,7 +12,7 @@ export default function SearchField() {
     const form = e.currentTarget;
     const q = (form.q as HTMLInputElement).value.trim();
     if (!q) return;
-    router.push(`/search?q=${encodeURIComponent(q)}`);
+    router.push(`/search?query=${encodeURIComponent(q)}`);
   }
 
   return (
